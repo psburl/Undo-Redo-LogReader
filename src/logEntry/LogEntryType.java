@@ -1,4 +1,4 @@
-package LogType;
+package logEntry;
 
 public enum LogEntryType {
 
@@ -6,5 +6,6 @@ public enum LogEntryType {
 	CommitTransaction,
 	Checkpoint_Start,
 	Chackpoint_end,
-	Operation;
+	Operation,
+	None;
 }

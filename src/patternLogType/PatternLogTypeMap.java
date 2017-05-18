@@ -1,6 +1,6 @@
-package PatternLogType;
+package patternLogType;
 
-import LogType.LogEntryType;
+import logEntry.LogEntryType;
 
 public class PatternLogTypeMap {
 
