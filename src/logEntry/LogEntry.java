@@ -1,20 +1,17 @@
 package logEntry;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import patternLogType.PatternLogTypeMap;
 import patternLogType.SingletonPatternsLogTypeMap;
 
 public abstract class LogEntry {
 	
 	protected LogEntryType entryType = LogEntryType.None;
-	protected String envolvedTransaction = "";
+	protected String involvedTransaction = "";
 	protected String feature = "";
 	protected String oldValue = "";
 	protected String newValue = "";
 	
-	public static LogEntry SerialiazeInput(String input) {
+	public static LogEntry SerializeInput(String input) {
 		
 		try {
 
@@ -64,7 +61,7 @@ public abstract class LogEntry {
 	}
 	
 	public String getEnvolvedTransaction(){
-		return this.envolvedTransaction;
+		return this.involvedTransaction;
 	}
 	
 	public String getFeature(){
@@ -84,8 +81,8 @@ public abstract class LogEntry {
 		if(entryType != null)
 			System.out.println("Log type: " + entryType);
 		
-		if(envolvedTransaction != null)
-			System.out.println("Envolved Transaction: " + envolvedTransaction);
+		if(involvedTransaction != null)
+			System.out.println("Envolved Transaction: " + involvedTransaction);
 		
 		if(feature != null)
 			System.out.println("Feature: " + feature);

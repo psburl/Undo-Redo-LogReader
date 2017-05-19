@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <root>
 	<paths>
-		<input>../test/entrada.txt</input>
-		<log></log>
+		<input>test/entrada.txt</input>
+		<log>test/log.txt</log>
 	</paths>
 </root>

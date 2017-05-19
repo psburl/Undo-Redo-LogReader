@@ -8,6 +8,6 @@ public final class LogEntryEndCheckpoint extends LogEntry{
 		super.feature = null;
 		super.newValue = null;
 		super.oldValue = null;
-		super.envolvedTransaction = null;
+		super.involvedTransaction = null;
 	}
 }

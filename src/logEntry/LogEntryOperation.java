@@ -15,6 +15,6 @@ public class LogEntryOperation extends LogEntry{
 		super.feature = entries.get(1).trim();
 		super.oldValue = entries.get(2).trim();
 		super.newValue = entries.get(3).trim();
-		super.envolvedTransaction = entries.get(0).trim();
+		super.involvedTransaction = entries.get(0).trim();
 	}
 }

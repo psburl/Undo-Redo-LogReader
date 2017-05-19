@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 import logEntry.LogEntryType;
 
-public class SingletonPatternsLogTypeMap {
+public final class SingletonPatternsLogTypeMap {
 
     private static SingletonPatternsLogTypeMap instance = null;
     

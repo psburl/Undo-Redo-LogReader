@@ -8,6 +8,6 @@ public final class LogEntryStartCheckpoint extends LogEntry{
 		super.feature = null;
 		super.newValue = null;
 		super.oldValue = null;
-		super.envolvedTransaction = input.replace("<Start CKPT(", "").replace("<start CKPT(", "").replace(")>","").trim();
+		super.involvedTransaction = input.replace("<Start CKPT(", "").replace("<start CKPT(", "").replace(")>","").trim();
 	}
 }
