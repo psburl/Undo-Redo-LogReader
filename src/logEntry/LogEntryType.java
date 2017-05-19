@@ -2,10 +2,20 @@ package logEntry;
 
 public enum LogEntryType {
 
-	StartTransaction,
-	CommitTransaction,
-	Checkpoint_Start,
-	Chackpoint_end,
-	Operation,
-	None;
+	StartTransaction	(true),
+	CommitTransaction	(true),
+	CheckpointStart	    (true),
+	CheckpointEnd		(true),
+	Operation			(true),
+	None				(false);
+	
+	LogEntryType(boolean isValid){
+		this.isValid = isValid;
+	}
+	
+	private boolean isValid = false;
+	
+	public boolean isValid(){
+		return isValid;
+	}
 }
