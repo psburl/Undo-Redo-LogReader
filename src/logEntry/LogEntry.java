@@ -14,36 +14,49 @@ public abstract class LogEntry {
 	protected String oldValue = "";
 	protected String newValue = "";
 	
-	public static LogEntry SerialiazeInput(String input){
+	public static LogEntry SerialiazeInput(String input) {
 		
-		for(PatternLogTypeMap map : SingletonPatternsLogTypeMap.getInstance().getMap()){
-			
-			Pattern pattern = Pattern.compile(map.getpattern());
-			Matcher matcher = pattern.matcher(input);
-			
-			if(matcher.find()){
+		try {
+
+			SingletonPatternsLogTypeMap instance = SingletonPatternsLogTypeMap.getInstance();
+
+			PatternLogTypeMap logTypeMap = instance.findMatch(input);
+
+			if(logTypeMap == null)
+				throw new Exception("Pattern match not found to '" + input + "'");
+
+			LogEntryType entryType = logTypeMap.getLogEntryType();
+
+			switch(entryType){
 				
-				switch(map.getLogEntryType()){
-					
-					case StartTransaction: return new LogEntryStartTransaction(input);
-					case CommitTransaction: return new LogEntryCommitTransaction(input);
-					case Operation: return new LogEntryOperation(input);
-					default: return null;
-				}
+				case StartTransaction: return new LogEntryStartTransaction(input);
+				case CommitTransaction: return new LogEntryCommitTransaction(input);
+				case Operation: return new LogEntryOperation(input);
+				case CheckpointStart: return new LogEntryStartCheckpoint(input);
+				case CheckpointEnd: return new LogEntryEndCheckpoint(input);
+				default: throw new Exception("Has no factory to entry '" + entryType + "'");
 			}
+
+		}catch(Exception e){
+
+			System.out.println(e.getMessage());
+			printSerializeError(input);
+			return null;
 		}
-		
+	}
+
+	private static void printSerializeError(String input){
+
 		System.out.println("Invalid log input row detected! value: " + input);
-		
+
 		if(input.contains(">") == false)
 			System.out.println("token '>' not found!");
 		
 		else if(input.contains("<") == false)
 			System.out.println("token '<' not found!");
+		
 		else
 			System.out.println("token '" + input.replace("<", "").replace(">", "") + "' can't be recognized!");
-		
-		return null;
 	}
 
 	public LogEntryType getLogEntryType(){

@@ -4,7 +4,7 @@ public class main {
 
 	public static void main(String[] args) {
 
-		String line = "<ftart start>";
+		String line = "<Start a>";
 				
 		LogEntry entry = LogEntry.SerialiazeInput(line);
 		
