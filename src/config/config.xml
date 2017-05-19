@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<root>
+	<paths>
+		<input>../test/entrada.txt</input>
+		<log></log>
+	</paths>
+</root>

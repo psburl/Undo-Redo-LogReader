@@ -1,13 +1,11 @@
-import logEntry.LogEntry;
+
+import config.SingletonConfig;
+
 
 public class main {
 
 	public static void main(String[] args) {
-
-		String line = "<Start a>";
-				
-		LogEntry entry = LogEntry.SerialiazeInput(line);
 		
-		entry.Print();
+		System.out.println(SingletonConfig.getInstance().getInputPath());
 	}
 }
