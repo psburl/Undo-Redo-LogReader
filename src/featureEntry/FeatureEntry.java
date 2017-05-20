@@ -33,4 +33,8 @@ public final class FeatureEntry {
 		System.out.println("Feature: " + this.feature);
 		System.out.println("Value: " + this.value);
 	}
+	
+	public void setValue(String value){
+		this.value = value;
+	}
 }

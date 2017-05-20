@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 import java.util.List;
-
+import recover.Recover;
 import featureEntry.FeatureEntry;
 import globals.GlobalInfo;
 import input.SingletonInput;
@@ -18,11 +19,30 @@ public class Main {
 			LogEntry entry = LogEntry.SerializeInput(log);
 		}
 		
-		for(String s : GlobalInfo.getInstance().geStartedTransactions())
-			System.out.println("Start " + s);
+		List<Thread> threads = new ArrayList<Thread>();
 		
-
-		for(String s : GlobalInfo.getInstance().geCommitedTransactions())
-			System.out.println("Commit " + s);
+		for(FeatureEntry e :  GlobalInfo.getInstance().getFeatures())
+			System.out.println(e.getFeature() + "=" + e.getValue());
+		
+		for(String t : GlobalInfo.getInstance().geStartedTransactions()){
+			
+			Recover operation = Recover.decide(t);
+			
+			Thread th = new Thread(operation);
+			threads.add(th);
+			th.start();
+		}
+		try {
+			
+			for(Thread t : threads){
+				t.join();
+			}
+			
+		} catch (InterruptedException E) {
+			   // handle
+		}
+		
+		for(FeatureEntry e :  GlobalInfo.getInstance().getFeatures())
+			System.out.println(e.getFeature() + "=" + e.getValue());
 	}
 }

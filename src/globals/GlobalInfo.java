@@ -1,7 +1,11 @@
 package globals;
 
+import input.SingletonInput;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Semaphore;
+import featureEntry.FeatureEntry;
 
 
 public final class GlobalInfo {
@@ -12,6 +16,8 @@ public final class GlobalInfo {
     
     private List<String> startedTransactions;
     private List<String> commitedTransactions;
+    private List<FeatureEntry> features;
+    private Semaphore semaphore = new Semaphore(1);
     
     
     public static GlobalInfo getInstance(){
@@ -21,6 +27,12 @@ public final class GlobalInfo {
     		instance = new GlobalInfo();
     		instance.startedTransactions = new ArrayList<String>();
     		instance.commitedTransactions = new ArrayList<String>();
+    		
+    		instance.features = new ArrayList<FeatureEntry>();
+    		for(String f : SingletonInput.getInstance().getFeatures()){
+    			FeatureEntry feature = FeatureEntry.SerializeInput(f);
+    			instance.features.add(feature);
+    		}
         }
         
         return instance;
@@ -42,5 +54,28 @@ public final class GlobalInfo {
     
     public List<String> geCommitedTransactions(){
     	return instance.commitedTransactions;
+    }
+    
+    public void ChangeFeature(String id, String value){
+    	
+    	try{
+    	
+	    	instance.semaphore.acquire();
+	    	for(FeatureEntry feature : instance.features){
+	    		if(feature.getFeature().equals(id)){
+	    			feature.setValue(value);
+	    			break;
+	    		}    			
+	    	}
+	    	instance.semaphore.release();    	
+
+		} catch (InterruptedException e) {
+			
+			System.out.println(e.getMessage());
+		}
+    }
+    
+    public List<FeatureEntry> getFeatures(){
+    	return instance.features;
     }
 }
