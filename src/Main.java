@@ -1,6 +1,7 @@
 import java.util.List;
 
 import featureEntry.FeatureEntry;
+import globals.GlobalInfo;
 import input.SingletonInput;
 import logEntry.LogEntry;
 
@@ -15,19 +16,13 @@ public class Main {
 		for(String log : logs){
 			
 			LogEntry entry = LogEntry.SerializeInput(log);
-			entry.Print();
-			
-			System.out.println("---------------------------");
 		}
 		
-		List<String> features = SingletonInput.getInstance().getFeatures();
+		for(String s : GlobalInfo.getInstance().geStartedTransactions())
+			System.out.println("Start " + s);
 		
-		for(String feature : features){
-			
-			FeatureEntry entry = FeatureEntry.SerializeInput(feature);
-			entry.Print();
-			
-			System.out.println("---------------------------");
-		}
+
+		for(String s : GlobalInfo.getInstance().geCommitedTransactions())
+			System.out.println("Commit " + s);
 	}
 }

@@ -22,23 +22,52 @@ public final class SingletonInput {
     	if(instance == null){
         	
             instance = new SingletonInput();
-            
-            String content = ReadFile(SingletonConfig.getInstance().getInputPath());
-            instance.features = Arrays.asList(content.split("\r\n"));
-            
-            content = ReadFile(SingletonConfig.getInstance().getLogPath());
-            instance.logs = Arrays.asList(content.split("\r\n"));
+            instance.features = openFeatures();
+            instance.logs = openLogs();
         }
         
         return instance;
     }
     
-    private static String ReadFile(String path){
+    private static List<String> openLogs(){
+    	
+    	try{
+    		String content = readFile(SingletonConfig.getInstance().getLogPath());
+    		
+    		if(content.equals(""))
+    			throw new Exception("Error while open logs input");
+    		
+    		return Arrays.asList(content.split("\n"));
+    		
+    	}catch(Exception e){
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
+    }
+    
+    private static List<String> openFeatures(){
+    	
+    	try{
+    		String content = readFile(SingletonConfig.getInstance().getInputPath());
+    		
+    		if(content.equals(""))
+    			throw new Exception("Error while open features input");
+    		
+    		return Arrays.asList(content.split("\n"));
+    		
+    	}catch(Exception e){
+    		System.out.println(e.getMessage());
+    		return null;
+    	}
+    }
+    
+    private static String readFile(String path){
     	
     	try{
     		return new String(Files.readAllBytes(Paths.get(path)));
     	}
     	catch(IOException e){
+    		System.out.println("Exception opening file. Path: " + e.getMessage());
     		return "";
     	}
     }

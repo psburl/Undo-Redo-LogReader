@@ -1,5 +1,7 @@
 package logEntry;
 
+import globals.GlobalInfo;
+
 public final class LogEntryStartTransaction extends LogEntry{
 	
 	public LogEntryStartTransaction(String input){
@@ -9,5 +11,6 @@ public final class LogEntryStartTransaction extends LogEntry{
 		super.newValue = null;
 		super.oldValue = null;
 		super.involvedTransaction = input.replace("<Start", "").replace("<start", "").replace(">","").trim();
+		GlobalInfo.getInstance().setTransactionStart(super.involvedTransaction);
 	}
 }

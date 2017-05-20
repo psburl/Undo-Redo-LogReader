@@ -24,7 +24,7 @@ public final class SingletonConfig {
             
             try{
     			
-    			File configFile = new File("src/config/config.xml");
+    			File configFile = new File("../config.xml");
     			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     			DocumentBuilder builder = factory.newDocumentBuilder();
     			Document doc = builder.parse(configFile);
@@ -36,7 +36,8 @@ public final class SingletonConfig {
     			instance.logPath = element.getElementsByTagName("log").item(0).getTextContent();
     			
     		} catch (Exception e) {
-    			e.printStackTrace();
+    			
+    			System.out.println("Exception getting Config File. Path: " + e.getMessage());
     		}
         }
         
