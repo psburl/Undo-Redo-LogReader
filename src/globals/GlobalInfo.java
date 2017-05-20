@@ -5,6 +5,8 @@ import input.SingletonInput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+
+import logEntry.LogEntry;
 import featureEntry.FeatureEntry;
 
 
@@ -17,6 +19,7 @@ public final class GlobalInfo {
     private List<String> startedTransactions;
     private List<String> commitedTransactions;
     private List<FeatureEntry> features;
+    private List<LogEntry> logs;
     private Semaphore semaphore = new Semaphore(1);
     
     
@@ -32,6 +35,12 @@ public final class GlobalInfo {
     		for(String f : SingletonInput.getInstance().getFeatures()){
     			FeatureEntry feature = FeatureEntry.SerializeInput(f);
     			instance.features.add(feature);
+    		}
+    		
+    		instance.logs = new ArrayList<LogEntry>();
+    		for(String l : SingletonInput.getInstance().getLogs()){
+    			LogEntry log = LogEntry.SerializeInput(l);
+    			instance.logs.add(log);
     		}
         }
         
@@ -77,5 +86,9 @@ public final class GlobalInfo {
     
     public List<FeatureEntry> getFeatures(){
     	return instance.features;
+    }
+    
+    public List<LogEntry> getLogs(){
+    	return instance.logs;
     }
 }

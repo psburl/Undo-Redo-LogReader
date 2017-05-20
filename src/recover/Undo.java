@@ -1,6 +1,5 @@
 package recover;
 
-
 public final class Undo extends Recover{
 
 	public Undo(String transaction){
