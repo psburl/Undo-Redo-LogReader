@@ -60,7 +60,7 @@ public abstract class LogEntry {
 		return this.entryType;
 	}
 	
-	public String getEnvolvedTransaction(){
+	public String getInvolvedTransaction(){
 		return this.involvedTransaction;
 	}
 	

@@ -8,6 +8,8 @@ public final class Redo extends Recover {
 	
 	public void run() {
 		
-		System.out.println("Make Redo on " + transaction);
+		System.out.println("Starting Redo on " + transaction);
+		
+		
 	}
 }

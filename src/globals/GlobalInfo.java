@@ -91,4 +91,19 @@ public final class GlobalInfo {
     public List<LogEntry> getLogs(){
     	return instance.logs;
     }
+    
+    public List<LogEntry> getTransactionLogs(String transaction){
+    	
+    	List<LogEntry> logs = new ArrayList<LogEntry>();
+    	
+    	for(LogEntry log : this.logs){
+    		
+    		String involvedTransaction = log.getInvolvedTransaction();
+    		
+    		if(involvedTransaction != null && involvedTransaction.equals(transaction))
+    			logs.add(log);
+    	}
+    	
+    	return logs;
+    }
 }
