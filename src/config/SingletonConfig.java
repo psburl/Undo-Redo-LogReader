@@ -15,6 +15,7 @@ public final class SingletonConfig {
     
     private String inputPath = "";
     private String logPath = "";
+    private String outputPath = "";
     
     public static SingletonConfig getInstance(){
         
@@ -34,6 +35,7 @@ public final class SingletonConfig {
     			
     			instance.inputPath = element.getElementsByTagName("input").item(0).getTextContent();
     			instance.logPath = element.getElementsByTagName("log").item(0).getTextContent();
+    			instance.outputPath = element.getElementsByTagName("output").item(0).getTextContent();
     			
     		} catch (Exception e) {
     			
@@ -46,6 +48,10 @@ public final class SingletonConfig {
     
     public String getInputPath(){
     	return instance.inputPath;
+    }
+    
+    public String getOutputPath(){
+    	return instance.outputPath;
     }
     
     public String getLogPath(){

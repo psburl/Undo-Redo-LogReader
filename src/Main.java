@@ -1,7 +1,7 @@
+import io.Output;
 import java.util.ArrayList;
 import java.util.List;
 import recover.Recover;
-import featureEntry.FeatureEntry;
 import globals.GlobalInfo;
 
 public class Main {
@@ -28,9 +28,6 @@ public class Main {
 			   // handle
 		}
 		
-		for(FeatureEntry f : GlobalInfo.getInstance().getFeatures()){
-			f.Print();
-			System.out.println("----------------");
-		}
+		Output.Update();
 	}
 }

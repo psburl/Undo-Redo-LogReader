@@ -1,10 +1,12 @@
 package globals;
 
-import input.SingletonInput;
+
+import io.SingletonInput;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+
 import logEntry.LogEntryType;
 import logEntry.LogEntry;
 import featureEntry.FeatureEntry;
