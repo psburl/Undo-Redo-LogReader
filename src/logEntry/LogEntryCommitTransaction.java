@@ -1,7 +1,5 @@
 package logEntry;
 
-import globals.GlobalInfo;
-
 public class LogEntryCommitTransaction extends LogEntry {
 	
 	public LogEntryCommitTransaction(String input){
@@ -11,6 +9,5 @@ public class LogEntryCommitTransaction extends LogEntry {
 		super.newValue = null;
 		super.oldValue = null;
 		super.involvedTransaction = input.replace("<Commit", "").replace("<commit", "").replace(">","").trim();
-		GlobalInfo.getInstance().setTransactionCommit(super.involvedTransaction);
 	}
 }

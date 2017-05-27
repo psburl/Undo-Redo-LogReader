@@ -3,9 +3,10 @@ package globals;
 import input.SingletonInput;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Semaphore;
-
+import logEntry.LogEntryType;
 import logEntry.LogEntry;
 import featureEntry.FeatureEntry;
 
@@ -38,9 +39,36 @@ public final class GlobalInfo {
     		}
     		
     		instance.logs = new ArrayList<LogEntry>();
-    		for(String l : SingletonInput.getInstance().getLogs()){
-    			LogEntry log = LogEntry.SerializeInput(l);
-    			instance.logs.add(log);
+    		
+    		boolean hasEndCheck = false;
+    		boolean onlyNeeds = false;
+    		List<String> needs  = new ArrayList<String>();
+    		
+    		List<String> logs = SingletonInput.getInstance().getLogs();
+    		for(int last = logs.size() -1; last >= 0; last--){
+    			    			
+    			LogEntry log = LogEntry.SerializeInput(logs.get(last));
+    			
+    			if(log.getLogEntryType() == LogEntryType.CheckpointEnd)
+    				hasEndCheck = true;
+    			
+    			if(hasEndCheck && log.getLogEntryType() == LogEntryType.CheckpointStart){
+    				onlyNeeds = true;
+    				
+    				for(String need : log.getInvolvedTransaction().split(","))
+    					needs.add(need.trim());
+    			}
+    			
+    			if(onlyNeeds == false || needs.contains(log.getInvolvedTransaction())){
+    				
+    				if(log.getLogEntryType() == LogEntryType.StartTransaction)
+    					instance.setTransactionStart(log.getInvolvedTransaction());
+    				
+    				else if(log.getLogEntryType() == LogEntryType.CommitTransaction)
+        				instance.setTransactionCommit(log.getInvolvedTransaction());
+    			}
+    			
+    			instance.logs.add(0, log);
     		}
         }
         
@@ -65,7 +93,18 @@ public final class GlobalInfo {
     	return instance.commitedTransactions;
     }
     
-    public void ChangeFeature(String id, String value){
+    public String getCurrentFeatureValue(String id){
+    	
+    	for(FeatureEntry feature : instance.features){
+    		if(feature.getFeature().equals(id)){
+    			return feature.getValue();
+    		}    			
+    	}
+    	
+    	return "";
+    }
+    
+    public void changeFeature(String id, String value){
     	
     	try{
     	
