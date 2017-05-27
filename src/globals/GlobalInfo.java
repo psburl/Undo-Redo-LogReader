@@ -3,7 +3,6 @@ package globals;
 import input.SingletonInput;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import logEntry.LogEntryType;

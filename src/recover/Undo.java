@@ -19,10 +19,7 @@ public final class Undo extends Recover{
 			LogEntry log = involvedLogs.get(i);
 			
 			LogEntryType type = log.getLogEntryType();
-			
-			if(type == LogEntryType.StartTransaction)
-				break;
-			
+						
 			if(type != LogEntryType.Operation)
 				continue;			
 			
