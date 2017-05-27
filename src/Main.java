@@ -6,7 +6,7 @@ import globals.GlobalInfo;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException{
 		
 		List<Thread> threads = new ArrayList<Thread>();
 				
@@ -18,16 +18,10 @@ public class Main {
 			threads.add(th);
 			th.start();
 		}
-		try {
+
+		for(Thread t : threads)
+			t.join();
 			
-			for(Thread t : threads){
-				t.join();
-			}
-			
-		} catch (InterruptedException E) {
-			   // handle
-		}
-		
 		Output.Update();
 	}
 }
