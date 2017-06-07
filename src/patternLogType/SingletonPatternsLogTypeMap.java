@@ -21,11 +21,11 @@ public final class SingletonPatternsLogTypeMap {
         	
             instance = new SingletonPatternsLogTypeMap();
             instance.map = new ArrayList<PatternLogTypeMap>();
-            instance.map.add(new PatternLogTypeMap("<(S|s)tart CKPT\\([^.]+\\)>", LogEntryType.CheckpointStart));
-            instance.map.add(new PatternLogTypeMap("<(S|s)tart [^.]+>", LogEntryType.StartTransaction));
-            instance.map.add(new PatternLogTypeMap("<(C|c)ommit [^.]+>", LogEntryType.CommitTransaction));
-            instance.map.add(new PatternLogTypeMap("<[^,]+,[^,]+,[^,]+,[^,]+>", LogEntryType.Operation));
-            instance.map.add(new PatternLogTypeMap("<END CKPT>", LogEntryType.CheckpointEnd));
+            instance.map.add(new PatternLogTypeMap("^<start CKPT\\([^.]+\\)>", LogEntryType.CheckpointStart));
+            instance.map.add(new PatternLogTypeMap("^<start [^.]+>", LogEntryType.StartTransaction));
+            instance.map.add(new PatternLogTypeMap("^<commit [^.]+>", LogEntryType.CommitTransaction));
+            instance.map.add(new PatternLogTypeMap("^<[^,]+,[^,]+,[^,]+,[^,]+>", LogEntryType.Operation));
+            instance.map.add(new PatternLogTypeMap("^<end CKPT>", LogEntryType.CheckpointEnd));
         }
         
         return instance;
@@ -39,7 +39,7 @@ public final class SingletonPatternsLogTypeMap {
 
         for(PatternLogTypeMap map : getInstance().getMap()){
 
-            Pattern pattern = Pattern.compile(map.getpattern());
+            Pattern pattern = Pattern.compile(map.getpattern(), Pattern.CASE_INSENSITIVE);
             Matcher matcher = pattern.matcher(input);
             
             if(matcher.find())

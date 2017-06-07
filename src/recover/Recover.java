@@ -23,7 +23,8 @@ public abstract class Recover implements Runnable{
 			recover = new Undo(transaction);
 		
 		recover.involvedLogs = GlobalInfo.getInstance().getTransactionLogs(transaction);
-		
+	
+
 		return recover;
 		
 	}

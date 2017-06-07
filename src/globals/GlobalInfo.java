@@ -47,7 +47,7 @@ public final class GlobalInfo {
     		
     		List<String> logs = SingletonInput.getInstance().getLogs();
     		for(int last = logs.size() -1; last >= 0; last--){
-    			    			
+
     			LogEntry log = LogEntry.SerializeInput(logs.get(last));
     			
     			if(log.getLogEntryType() == LogEntryType.CheckpointEnd)
@@ -56,12 +56,13 @@ public final class GlobalInfo {
     			if(hasEndCheck && log.getLogEntryType() == LogEntryType.CheckpointStart){
     				onlyNeeds = true;
     				
-    				for(String need : log.getInvolvedTransaction().split(","))
+    				for(String need : log.getInvolvedTransaction().split(",")){
     					needs.add(need.trim());
+					}
     			}
     			
-    			if(onlyNeeds == false || needs.contains(log.getInvolvedTransaction())){
-    				
+    			if(onlyNeeds == false || needs.contains(log.getInvolvedTransaction().trim())){
+					
     				if(log.getLogEntryType() == LogEntryType.StartTransaction)
     					instance.setTransactionStart(log.getInvolvedTransaction());
     				

@@ -9,8 +9,8 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException{
 		
 		List<Thread> threads = new ArrayList<Thread>();
-				
-		for(String t : GlobalInfo.getInstance().geStartedTransactions()){
+
+		for(String t : GlobalInfo.getInstance().geStartedTransactions()){		
 			
 			Recover operation = Recover.decide(t);
 			
