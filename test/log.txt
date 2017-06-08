@@ -1,12 +1,27 @@
-<START T1>
-<T1, A, 4, 5>
-<Start T2>
-<COMMIT T1> 
-<T2, B, 9, 10>
-<Start CKPT(T2)>
-<T2, C, 14, 15>
-<Start T3> 
-<T3, D, 19, 20>
-<END CKPT>
-<COMMIT T2>
-<COMMIT T3>     
+<start T1>
+<T1,A,5,10>
+<start T2>
+<T2,C,30,45>
+<T2,E,7,17>
+<commit T2>
+<T1,C,45,55>
+<start T3>
+<T3,B,15,20>
+<commit T1>
+<start T4>
+<T4,C,55,65>
+<start T5>
+<T5,D,50,65>
+<start ckpt(T3,T4,T5)>
+<T5,D,65,39>
+<start T6>
+<T3,A,10,25>
+<T6,F,1,2>
+<T3,E,17,28>
+<commit T3>
+<T6,A,25,32>
+<start T7>
+<T7,B,20,30>
+<commit T7>
+<end ckpt>
+<commit T6>

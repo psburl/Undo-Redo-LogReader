@@ -48,6 +48,12 @@ public final class GlobalInfo {
     		List<String> logs = SingletonInput.getInstance().getLogs();
     		for(int last = logs.size() -1; last >= 0; last--){
 
+				if(logs.get(last).equals("")){
+					
+					System.out.println("empty log line found! [line "+last+"] ignoring line...");
+					continue;
+				}
+
     			LogEntry log = LogEntry.SerializeInput(logs.get(last));
     			
     			if(log.getLogEntryType() == LogEntryType.CheckpointEnd)

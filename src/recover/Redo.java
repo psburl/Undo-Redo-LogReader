@@ -24,7 +24,7 @@ public final class Redo extends Recover {
 			String currentValue = GlobalInfo.getInstance().getCurrentFeatureValue(log.getFeature());
 			
 			System.out.println(
-					transaction + " undo recover are" + 
+					transaction + " redo recover are" + 
 					" changing feature " + log.getFeature() + 
 					" from value " + currentValue + 
 					" to " + log.getNewValue());
@@ -32,6 +32,6 @@ public final class Redo extends Recover {
 			GlobalInfo.getInstance().changeFeature(log.getFeature(), log.getNewValue());
 		}
 		
-		System.out.println("Finished " + transaction + " redu recover");
+		System.out.println("Finished " + transaction + " redo recover");
 	}
 }
